@@ -48,9 +48,9 @@ FileUploader.propTypes = {
     deleteIcon: PropTypes.element,
     className: PropTypes.any,
     emptyGuideText: PropTypes.string,
-    api: PropTypes.func,
     disabled: PropTypes.bool,
     showFooter: PropTypes.bool,
+    onUpload: PropTypes.func
 };
 FileUploader.defaultProps = {
     borderWidth: 1,
@@ -63,6 +63,9 @@ FileUploader.defaultProps = {
     emptyGuideText: "List is empty!",
     disabled: false,
     showFooter: false,
+    onUpload: function (fileList, afterDone) {
+        console.log(fileList, afterDone);
+    }
 };
 function FileUploader(props) {
     var refInput = React.useRef(null);
@@ -85,7 +88,10 @@ function FileUploader(props) {
         else {
             setWait(true);
             setMessage("");
-            props.api(list, console.log);
+            props.onUpload(list, function (_message) {
+                setWait(false);
+                setMessage(_message);
+            });
         }
     }
     return (React.createElement(core.Box, { border: props.borderWidth, borderColor: "divider", className: props.className },

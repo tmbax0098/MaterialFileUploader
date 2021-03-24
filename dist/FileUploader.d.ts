@@ -9,9 +9,9 @@ interface FileUploaderProps {
     deleteIcon: any;
     className: any;
     emptyGuideText: "Choose file!";
-    api: any;
     disabled: boolean;
     showFooter: boolean;
+    onUpload: any;
 }
 declare function FileUploader(props: FileUploaderProps): JSX.Element;
 declare namespace FileUploader {
@@ -24,9 +24,9 @@ declare namespace FileUploader {
         deleteIcon: PropTypes.Requireable<PropTypes.ReactElementLike>;
         className: PropTypes.Requireable<any>;
         emptyGuideText: PropTypes.Requireable<string>;
-        api: PropTypes.Requireable<(...args: any[]) => any>;
         disabled: PropTypes.Requireable<boolean>;
         showFooter: PropTypes.Requireable<boolean>;
+        onUpload: PropTypes.Requireable<(...args: any[]) => any>;
     };
     var defaultProps: {
         borderWidth: number;
@@ -39,6 +39,7 @@ declare namespace FileUploader {
         emptyGuideText: string;
         disabled: boolean;
         showFooter: boolean;
+        onUpload: (fileList: File[], afterDone: any) => void;
     };
 }
 export default FileUploader;

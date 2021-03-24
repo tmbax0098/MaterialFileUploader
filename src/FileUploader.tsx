@@ -24,9 +24,9 @@ interface FileUploaderProps {
     deleteIcon: any,
     className: any,
     emptyGuideText: "Choose file!",
-    api: any,
     disabled: boolean,
     showFooter: boolean,
+    onUpload: any,
 };
 
 FileUploader.propTypes = {
@@ -38,9 +38,9 @@ FileUploader.propTypes = {
     deleteIcon: PropTypes.element,
     className: PropTypes.any,
     emptyGuideText: PropTypes.string,
-    api: PropTypes.func,
     disabled: PropTypes.bool,
     showFooter: PropTypes.bool,
+    onUpload: PropTypes.func
 };
 
 FileUploader.defaultProps = {
@@ -54,6 +54,9 @@ FileUploader.defaultProps = {
     emptyGuideText: "List is empty!",
     disabled: false,
     showFooter: false,
+    onUpload: (fileList: Array<File>, afterDone: any) => {
+        console.log(fileList, afterDone);
+    }
 };
 
 function FileUploader(props: FileUploaderProps) {
@@ -83,7 +86,10 @@ function FileUploader(props: FileUploaderProps) {
         } else {
             setWait(true);
             setMessage("");
-            props.api(list, console.log);
+            props.onUpload(list, (_message: string) => {
+                setWait(false);
+                setMessage(_message);
+            });
         }
     }
 
@@ -163,6 +169,4 @@ function FileUploader(props: FileUploaderProps) {
         </Box>
     );
 }
-
-
 export default FileUploader;

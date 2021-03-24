@@ -1,5 +1,18 @@
 # NAME
 > material file uploader
-# IMPORTANT
-> this module currently is not ready to use
 
+# ABOUT
+> choose many (0 - n) file for upload and show list of selected files
+
+# EXAMPLE
+        import FileUploader from "material_file_uploader";
+
+        return (
+            <FileUploader
+                maxCount={1}
+                showFooter={true}
+                onUpload={(list, onAnswer) => {
+                    console.log(list);
+                    setTimeout(() => onAnswer("Upload successfully!") , 2000);
+                }}/>
+            );
