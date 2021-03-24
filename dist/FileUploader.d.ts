@@ -1,6 +1,7 @@
 /// <reference types="react" />
 import * as PropTypes from "prop-types";
 interface FileUploaderProps {
+    borderWidth?: number;
     max?: number;
     title?: string;
     chooseText?: "Choose";
@@ -11,6 +12,7 @@ interface FileUploaderProps {
 declare function FileUploader(props: FileUploaderProps): JSX.Element;
 declare namespace FileUploader {
     var propTypes: {
+        borderWidth: PropTypes.Requireable<number>;
         max: PropTypes.Requireable<number>;
         title: PropTypes.Requireable<string>;
         chooseText: PropTypes.Requireable<string>;
@@ -19,6 +21,7 @@ declare namespace FileUploader {
         emptyGuideText: PropTypes.Requireable<string>;
     };
     var defaultProps: {
+        borderWidth: number;
         max: number;
         title: string;
         chooseText: string;
