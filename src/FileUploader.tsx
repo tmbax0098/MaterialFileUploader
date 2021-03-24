@@ -5,6 +5,7 @@ import { Box, Typography, Button, List, ListItem, ListItemText, ListItemIcon } f
 
 
 interface FileUploaderProps {
+    borderWidth?: number,
     max?: number
     title?: string,
     chooseText?: "Choose",
@@ -14,6 +15,7 @@ interface FileUploaderProps {
 };
 
 FileUploader.propTypes = {
+    borderWidth: PropTypes.number,
     max: PropTypes.number,
     title: PropTypes.string,
     chooseText: PropTypes.string,
@@ -23,6 +25,7 @@ FileUploader.propTypes = {
 };
 
 FileUploader.defaultProps = {
+    borderWidth: 1,
     max: -1,
     title: "Title",
     chooseText: "Choose",
@@ -41,7 +44,7 @@ function FileUploader(props: FileUploaderProps) {
     }
 
     return (
-        <Box className={props.className}>
+        <Box border={props.borderWidth} borderColor="divider" className={props.className} >
             <Box display="flex" flexDirection="row" p={1} borderBottom={1} borderColor="divider">
                 <Box flexGrow={1}>
                     <Typography>
@@ -58,23 +61,24 @@ function FileUploader(props: FileUploaderProps) {
                 </Button>
             </Box>
             <Box minHeight={50} overflow="auto" maxHeight={150}>
-                list.length === 0 ?
-                <Typography color="textSecondary">
-                    {props.emptyGuideText}
-                </Typography>
-                :
-                <List>
-                    {
-                        list?.map((item, index) => (
-                            <ListItem key={index}>
-                                <ListItemText primary={item} />
-                                <ListItemIcon onClick={() => deleteItem(item)}>
-                                    {props.deleteIcon}
-                                </ListItemIcon>
-                            </ListItem>
-                        ))
-                    }
-                </List>
+                {list.length === 0 ?
+                    <Typography color="textSecondary">
+                        {props.emptyGuideText}
+                    </Typography>
+                    :
+                    <List>
+                        {
+                            list?.map((item, index) => (
+                                <ListItem key={index}>
+                                    <ListItemText primary={item} />
+                                    <ListItemIcon onClick={() => deleteItem(item)}>
+                                        {props.deleteIcon}
+                                    </ListItemIcon>
+                                </ListItem>
+                            ))
+                        }
+                    </List>
+                }
             </Box>
         </Box>
     );
