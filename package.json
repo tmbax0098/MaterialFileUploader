@@ -1,6 +1,6 @@
 {
   "name": "material_file_uploader",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "description": "> React multi select item from a (text , value) list",
   "main": "dist/index.js",

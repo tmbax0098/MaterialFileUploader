@@ -36,6 +36,7 @@ FileUploader.defaultProps = {
 
 function FileUploader(props: FileUploaderProps) {
 
+    const refInput = React.useRef<HTMLInputElement>(null);
 
     const [list, setList] = React.useState<Array<string>>([]);
 
@@ -43,24 +44,34 @@ function FileUploader(props: FileUploaderProps) {
         setList(list.filter(element => element !== item));
     }
 
+    function chooseFile() {
+
+        if (refInput !== null && refInput.current !== null) {
+            // console.log(refInput.current);
+            refInput.current.click()
+        }
+
+    }
+
     return (
         <Box border={props.borderWidth} borderColor="divider" className={props.className} >
-            <Box display="flex" flexDirection="row" p={1} borderBottom={1} borderColor="divider">
+            <Box display="flex" flexDirection="row" p={1} alignItems="center">
                 <Box flexGrow={1}>
                     <Typography>
                         {props.title}
                     </Typography>
                 </Box>
-                <Button variant="text">
+                <Button variant="text" onClick={chooseFile}>
                     {props.chooseText}
                     <input
+                        ref={refInput}
                         onChange={console.log}
                         type="file"
                         hidden
                     />
                 </Button>
             </Box>
-            <Box minHeight={50} overflow="auto" maxHeight={150}>
+            <Box minHeight={50} overflow="auto" maxHeight={150} borderTop={props.borderWidth} borderColor="divider">
                 {list.length === 0 ?
                     <Typography color="textSecondary">
                         {props.emptyGuideText}
